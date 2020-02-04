@@ -1,25 +1,35 @@
 package com.example.recyclertest
 
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.list_view_item.view.*
 
-class DataAdapter:RecyclerView.Adapter<DataAdapter.MyViewHolder>() {
+class DataAdapter(val context:Context,val hobby: List<Hobby>):RecyclerView.Adapter<DataAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+val view=LayoutInflater.from(context).inflate(R.layout.list_view_item,parent,false)
+        return MyViewHolder(view)
+
     }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return hobby.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    val hobby=hobby[position]
+        holder.setData(hobby,position)
+
     }
 
-    inner class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
+    inner class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+fun setData(hobby:Hobby?,pos:Int){
+    itemView.txtTitle.text=hobby!!.title
+}
 }
 
 
